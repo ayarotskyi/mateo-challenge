@@ -116,3 +116,17 @@
     background-size: 0 2px, 100% 2px;
   }
 }
+
+div.DraftEditor-root {
+  border: 2px solid rgb(249, 152, 116);
+  background-color: rgb(251, 244, 244);
+  border-radius: 10px;
+  width: 100%;
+  overflow-y: auto;
+  height: fit-content;
+}
+div.DraftEditor-editorContainer,
+div.public-DraftEditor-content {
+  min-height: 200px;
+  height: fit-content;
+}
