@@ -11,7 +11,9 @@ import {
 import { reduce } from 'ramda';
 import * as React from 'react';
 
-const insertFile = (editorState: EditorState, file: Blob) => {
+import FileComponent from '@/components/FileComponent';
+
+const insertFile = (editorState: EditorState, file: File) => {
   const contentState = editorState.getCurrentContent();
   const contentStateWithEntity = contentState.createEntity(
     'file',
@@ -25,7 +27,7 @@ const insertFile = (editorState: EditorState, file: Blob) => {
   return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ');
 };
 
-const Composer = (props: EditorProps) => {
+const Composer: React.FC<EditorProps> = (props) => {
   const handleKeyCommand = React.useCallback(
     (command: DraftEditorCommand, editorState: EditorState) => {
       const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -40,7 +42,7 @@ const Composer = (props: EditorProps) => {
     [props]
   );
 
-  const handlePastedFiles = (files: Blob[]): DraftHandleValue => {
+  const handlePastedFiles = (files: File[]): DraftHandleValue => {
     props.onChange(reduce(insertFile, props.editorState, files));
 
     return 'handled';
@@ -56,7 +58,9 @@ const Composer = (props: EditorProps) => {
 
         if (entity?.getType() === 'file') {
           return {
-            component: () => <div className='h-10 w-10 bg-red-900'></div>,
+            component: () => (
+              <FileComponent file={entity.getData()} size={70} />
+            ),
             editable: false,
           };
         }
