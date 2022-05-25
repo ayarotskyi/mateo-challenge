@@ -1,7 +1,7 @@
 import { convertFromRaw, EditorState } from 'draft-js';
 import * as React from 'react';
 
-import { Composer } from '@/components/Composer';
+import Composer from '@/components/Composer';
 
 export default function HomePage() {
   const [editorState, setEditorState] = React.useState(
