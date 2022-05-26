@@ -22,7 +22,7 @@ const FileComponent: React.FC<Props> = ({ file, ...props }) => {
 
   return (
     <div
-      className='flex w-fit select-none flex-col items-center justify-center'
+      className='m-2 flex w-fit select-none flex-col items-center justify-center rounded-lg border-2 p-1'
       style={wrapperStyle}
     >
       <BsFileEarmark {...props} />
