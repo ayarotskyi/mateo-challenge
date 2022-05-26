@@ -1,5 +1,4 @@
 import {
-  AtomicBlockUtils,
   ContentBlock,
   DraftEditorCommand,
   DraftHandleValue,
@@ -11,21 +10,9 @@ import {
 import { reduce } from 'ramda';
 import * as React from 'react';
 
-import FileComponent from '@/components/FileComponent';
+import { insertFile } from '@/lib/helper';
 
-const insertFile = (editorState: EditorState, file: File) => {
-  const contentState = editorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(
-    'file',
-    'IMMUTABLE',
-    file
-  );
-  const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-  const newEditorState = EditorState.set(editorState, {
-    currentContent: contentStateWithEntity,
-  });
-  return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' ');
-};
+import FileComponent from '@/components/FileComponent';
 
 const Composer: React.FC<EditorProps> = (props) => {
   const handleKeyCommand = React.useCallback(
@@ -48,7 +35,7 @@ const Composer: React.FC<EditorProps> = (props) => {
     return 'handled';
   };
 
-  const renderFiles = React.useCallback(
+  const renderFile = React.useCallback(
     (block: ContentBlock) => {
       const content = props.editorState.getCurrentContent();
       const entityKey = block.getEntityAt(0);
@@ -74,7 +61,7 @@ const Composer: React.FC<EditorProps> = (props) => {
       {...props}
       handleKeyCommand={handleKeyCommand}
       handlePastedFiles={handlePastedFiles}
-      blockRendererFn={renderFiles}
+      blockRendererFn={renderFile}
     />
   );
 };
