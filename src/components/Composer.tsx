@@ -46,7 +46,7 @@ const Composer: React.FC<EditorProps> = (props) => {
         if (entity?.getType() === 'file') {
           return {
             component: () => (
-              <FileComponent file={entity.getData()} size={70} />
+              <FileComponent file={entity.getData()} size={100} />
             ),
             editable: false,
           };

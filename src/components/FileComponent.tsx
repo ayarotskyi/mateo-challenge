@@ -26,7 +26,7 @@ const FileComponent: React.FC<Props> = ({ file, ...props }) => {
       style={wrapperStyle}
     >
       <BsFileEarmark {...props} />
-      <div className='flex w-full min-w-0 flex-1 overflow-hidden text-ellipsis whitespace-nowrap px-2'>
+      <div className='flex w-full min-w-0 flex-1 px-2 text-xs'>
         <div className='overflow-hidden text-ellipsis whitespace-nowrap'>
           {fileName}
         </div>
